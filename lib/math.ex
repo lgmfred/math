@@ -2,7 +2,7 @@ defmodule Math do
   @moduledoc """
   `Math` module just for abstraction.
   """
-## (integers, floats, strings, lists, maps, keyword lists)
+  
   @doc """
   Add the two arguments together
 
@@ -32,9 +32,9 @@ defmodule Math do
 
   @doc """
   Subtract two arguments
-
+  
   ## Examples
-
+  
       iex> Math.subtract!(3, -2)
       5
 

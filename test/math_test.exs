@@ -104,6 +104,7 @@ defmodule MathTest do
       assert_raise FunctionClauseError, fn ->
         Math.subtract!(1..10, nil)
       end
+
     end
   end
 end
