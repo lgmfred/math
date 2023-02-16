@@ -1,27 +1,66 @@
 defmodule Math do
-  @doc """
-  Add two integers
+  @moduledoc """
+  `Math` module just for abstraction.
   """
-  def add(int1, int2) when is_integer(int1) and is_integer(int2) do
-    int1 + int2
-  end
+  
+  @doc """
+  Add the two arguments together
 
-  def add(str1, str2) when is_binary(str1) and is_binary(str2) do
-    str1 <> str2
-  end
+  ## Examples
 
-  def add(list1, list2) do
-    # list1 ++ list2 => r, g, r
-    # => r, g
-    # [list1 | list2]
-    [list1 | list2] |> List.flatten()
-  end
+      iex> Math.add!(3, -2)
+      1
 
-  def subtract(int1, int2) when is_integer(int1) and is_integer(int2) do
-    int1 - int2
-  end
+      iex> Math.add!(6.7, -0.7)
+      6.0
 
-  def subtract(list1, list2) do
-    list1 -- list2
+      iex> Math.add!("foo", "baar")
+      "foobaar"
+
+      iex> Math.add!([:a, "b"], [{:c}, [:d]])
+      [:a, "b", {:c}, [:d]]
+
+      iex> Math.add!(%{a: "a"}, %{b: :b})
+      ** (FunctionClauseError) no function clause matching in Math.add!/2
+
+      iex> Math.add!([a: "a"], [b: :b])
+      [a: "a", b: :b]
+  """
+  def add!(a, b) when is_number(a) and is_number(b), do: a + b
+  def add!(a, b) when is_binary(a) and is_binary(b), do: a <> b
+  def add!(a, b) when is_list(a) and is_list(b), do: a ++ b
+
+  @doc """
+  Subtract two arguments
+  
+  ## Examples
+  
+      iex> Math.subtract!(3, -2)
+      5
+
+      iex> Math.subtract!(6.7, -0.7)
+      7.4
+
+      iex> Math.subtract!("foobaar", "baar")
+      "foo"
+
+      iex> Math.subtract!([:a, "b", {:c}, [:d]], [{:c}, [:d]])
+      [:a, "b"]
+
+      iex> Math.subtract!(%{a: "a"}, %{b: :b})
+      ** (FunctionClauseError) no function clause matching in Math.subtract!/2
+
+      iex> Math.subtract!([a: "a", b: :b], [a: "a"])
+      [b: :b]
+  """
+  def subtract!(a, b) when is_number(a) and is_number(b), do: a - b
+  def subtract!(a, b) when is_list(a) and is_list(b), do: a -- b
+
+  def subtract!(a, b) when is_binary(a) and is_binary(b) do
+    list_a = String.split(a, "", trim: true)
+    list_b = String.split(b, "", trim: true)
+
+    (list_a -- list_b)
+    |> List.to_string()
   end
 end
