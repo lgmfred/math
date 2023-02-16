@@ -2,7 +2,9 @@ defmodule Math do
   @moduledoc """
   `Math` module just for abstraction.
   """
-  
+
+  @spec add!(binary() | list() | number(), binary | list() | number()) ::
+          binary() | list() | number()
   @doc """
   Add the two arguments together
 
@@ -30,11 +32,13 @@ defmodule Math do
   def add!(a, b) when is_binary(a) and is_binary(b), do: a <> b
   def add!(a, b) when is_list(a) and is_list(b), do: a ++ b
 
+  @spec subtract!(binary() | list() | number(), binary | list() | number()) ::
+          binary() | list() | number()
   @doc """
   Subtract two arguments
-  
+
   ## Examples
-  
+
       iex> Math.subtract!(3, -2)
       5
 
